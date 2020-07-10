@@ -1,0 +1,28 @@
+plugins:
+  source:
+    - module: intake_acclat
+sources:
+  b2_design:
+    driver: acclatsource
+    args:
+      urlpath: '/home/mti/catalog/lattices/b2/b2_design_lattice_1996'
+    metadata:
+      plots:
+        beta:
+          x: S
+          y: [BETX,BETY,DX]
+        phase:
+          x: S
+          y: [MUX, MUY]
+  b3hwang:
+    driver: acclatsource
+    args:
+      urlpath: '/home/mti/catalog/lattices/b3/b3_hwang_2020_07_03'
+    metadata:
+      plots:
+        beta:
+          x: S
+          y: [BETX,BETY,DX]
+        phase:
+          x: S
+          y: [MUX, MUY]
