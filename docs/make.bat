@@ -9,7 +9,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=source
 set BUILDDIR=build
-set SPHINXPROJ=intake_acclat
+set SPHINXPROJ=intake-acclat
 
 if "%1" == "" goto help
 
@@ -34,4 +34,3 @@ goto end
 
 :end
 popd
-
