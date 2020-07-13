@@ -11,7 +11,7 @@ Installation
 
 To use this plugin for `intake`_, install with the following command::
 
-   conda install -c conda-forge intake-xarray
+   pip install intake-acclat
 
 .. _intake: https://github.com/ContinuumIO/intake
 
