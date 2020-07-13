@@ -36,8 +36,8 @@ def test_remote(intake_server):
 
     # cat_local = intake.open_catalog(cat_file)
     cat = intake.open_catalog(intake_server)
-    assert "b2_design" in cat
-    source = cat.b2_design()
+    assert "fodo" in cat
+    source = cat.fodo()
     assert source._schema is not None
     assert isinstance(source.read(), dict)
     assert isinstance(source.to_madx(), str)

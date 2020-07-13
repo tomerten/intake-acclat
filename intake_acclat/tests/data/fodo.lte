@@ -1,9 +1,6 @@
-! The messy formatting is intentional to test the converter
 D1: DRIFT, L=55e-2   !! This is a comment with two !!
 Q1 :KQUAD, L="2 10 /", K1=1.2
- Q2:KQUAD, l=.4, k1=-1.2
-
-! Another comment
+Q2:KQUAD, l=.4, k1=-1.2
 
 % pi 8 / sto angle
 % 1 atan 4 * sto custom_pi
