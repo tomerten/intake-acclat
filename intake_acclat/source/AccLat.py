@@ -60,8 +60,14 @@ class AccLatSource(base.DataSource):
             self.twiss = get_twissdata(urlpath + ".twiss")
 
             meta = pd.read_csv(
-                urlpath + ".params", delim_whitespace=True, skiprows=4, error_bad_lines=False
+                urlpath + ".params",
+                delim_whitespace=True,
+                skiprows=4,
+                error_bad_lines=False,
+                header=None,
             )
+            meta.columns = ["param", "value"]
+            meta = meta.set_index("param")["value"].to_dict()
 
             print(meta)
             # meta = get_tfsheader(urlpath + ".twiss").set_index("NAME")["VALUE"].to_dict()
