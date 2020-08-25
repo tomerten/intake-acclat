@@ -59,7 +59,10 @@ class AccLatSource(base.DataSource):
         if self.twiss is None:
             self.twiss = get_twissdata(urlpath + ".twiss")
 
-            meta = get_tfsheader(urlpath + ".twiss").set_index("NAME")["VALUE"].to_dict()
+            meta = pd.read_csv(
+                urlpath + ".params", delim_whitespace=True, skiprows=4, error_bad_lines=False
+            )
+            # meta = get_tfsheader(urlpath + ".twiss").set_index("NAME")["VALUE"].to_dict()
 
         return base.Schema(
             datashape=None,
