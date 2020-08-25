@@ -69,7 +69,8 @@ class AccLatSource(base.DataSource):
             meta.columns = ["param", "value"]
             meta = meta.set_index("param")["value"].to_dict()
 
-            print(meta)
+            # :w
+            # print(meta)
             # meta = get_tfsheader(urlpath + ".twiss").set_index("NAME")["VALUE"].to_dict()
 
         return base.Schema(
