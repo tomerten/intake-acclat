@@ -64,6 +64,11 @@ class RemoteAccLat(RemoteSource):
         self._load_metadata()
         return self._madx
 
+    def tracy(self):
+        # print("tomadx on remote")
+        self._load_metadata()
+        return self._tracy
+
     def to_lte(self):
         self._load_metadata()
         return self._lte
