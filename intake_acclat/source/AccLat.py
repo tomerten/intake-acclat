@@ -10,8 +10,8 @@ class AccLatSource(base.DataSource):
 
     Parameters:
     -----------
-    urlpath: str 
-        path to lattice files excluding the extension 
+    urlpath: str
+        path to lattice files excluding the extension
         file extensions are reserved for the specific formats.
     """
 
@@ -21,6 +21,7 @@ class AccLatSource(base.DataSource):
 
     def __init__(self, urlpath, metadata=None):
         self.urlpath = urlpath
+        self._tracy = None
         self._json = None
         self._madx = None
         self._lte = None
@@ -29,8 +30,9 @@ class AccLatSource(base.DataSource):
         super(AccLatSource, self).__init__(metadata=metadata)
 
     def _get_schema(self):
-        import fsspec
         import json
+
+        import fsspec
 
         urlpath = self._get_cache(self.urlpath)[0]
         fs = fsspec.filesystem("file")
@@ -39,6 +41,11 @@ class AccLatSource(base.DataSource):
         if self._json is None:
             with fs.open(urlpath + ".json") as f:
                 self._json = json.loads(f.read())
+
+        # read tracy file
+        if self._tracy is None:
+            with fs.open(urlpath + ".lat") as f:
+                self._tracy = f.read().decode("ascii")
 
         # read madx file
         if self._madx is None:
@@ -87,7 +94,11 @@ class AccLatSource(base.DataSource):
 
     def read(self):
         # print("read on local")
-        return self._json, self._madx, self._lte, self.twiss
+        return self._tracy, self._json, self._madx, self._lte, self.twiss
+
+    def tracy(self):
+        # print("tracy on local")
+        return self._tracy
 
     def to_madx(self):
         # print("tomadx on local")

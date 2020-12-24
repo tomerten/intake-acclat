@@ -24,6 +24,7 @@ class RemoteAccLat(RemoteSource):
             shape=self.shape,
             datashape=None,
         )
+        self._tracy = None
         self._json = None
         self._madx = None
         self._lte = None
@@ -36,13 +37,13 @@ class RemoteAccLat(RemoteSource):
         Tricky thing here is that intake uses the code ´get_partition´ triggering
         the read or _get_partition from the local driver on the server side (see ../containers/AccLat.py).
         This returns a ´single object´, making it not so easy to return the data stored in the
-        different files in a straightforwar way. Therefor I decided to the serverside plugin
-        driver return a tuple of datasets, stored in attributes, 
+        different files in a straightforward way. Therefor I decided to the serverside plugin
+        driver return a tuple of datasets, stored in attributes,
         allowing for the different format return functions. The read or get_partition functions
         then return the easiest format - namely the latticejson format.
         """
         if self._json is None:
-            self._json, self._madx, self._lte, self.twiss = get_partition(
+            self._tracy, self._json, self._madx, self._lte, self.twiss = get_partition(
                 self.url, self.headers, self._source_id, self.container, None
             )
 
@@ -105,6 +106,7 @@ class RemoteAccLat(RemoteSource):
         return hvPlot(self.twiss, custom_plots=plots, **metadata)
 
     def _close(self):
+        self._tracy = None
         self._json = None
         self._madx = None
         self._lte = None
